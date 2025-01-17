@@ -2,5 +2,8 @@
 .envrc
 .python-version
 
+*.pyc
+__pycache__/
+
 db.sqlite3
 postgres
