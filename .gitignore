@@ -1,4 +1,6 @@
 .env
 .envrc
 .python-version
+
+db.sqlite3
 postgres
