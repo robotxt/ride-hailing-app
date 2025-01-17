@@ -27,4 +27,5 @@ class Ride(models.Model):
     dropoff_longitude = models.DecimalField(
         max_digits=9, decimal_places=6, validators=[MinValueValidator(-180.0), MaxValueValidator(180.0)]
     )
+    pickup_time = models.DateTimeField()
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default=None, null=False)
