@@ -52,6 +52,15 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_ALREADY_REGISTERED_ERROR = "Email already exist"
 
+    ADMIN = "ADMIN"
+    RIDER = "RIDER"
+    DRIVER = "DRIVER"
+    ROLE_CHOICES = [
+        (ADMIN, "admin"),
+        (RIDER, "rider"),
+        (DRIVER, "driver"),
+    ]
+
     email = models.EmailField(
         verbose_name="Email",
         unique=True,
@@ -60,6 +69,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(verbose_name="First name", max_length=30, default="first")
     last_name = models.CharField(verbose_name="Last name", max_length=30, default="last")
     phone = PhoneField.build(blank=True)
+    role = models.CharField(max_length=30, choices=ROLE_CHOICES, default=None, null=True)
     is_admin = models.BooleanField(verbose_name="Admin", default=False)
     is_active = models.BooleanField(verbose_name="Active", default=True)
     is_staff = models.BooleanField(verbose_name="Staff", default=False)
