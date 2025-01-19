@@ -33,7 +33,10 @@ class Command(BaseCommand):
     help = "Create Sender"
 
     def handle(self, *args, **options):
-        _create_user("admin@example.com", role=User.ADMIN)
+        admin = _create_user("admin@example.com", role=User.ADMIN)
+        admin.set_password("Password101")
+        admin.save()
+
         rider = _create_user("rider@example.com", role=User.RIDER)
         driver = _create_user("driver@example.com", role=User.DRIVER)
 
