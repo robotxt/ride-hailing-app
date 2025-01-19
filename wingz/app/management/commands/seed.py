@@ -18,7 +18,7 @@ def _create_user(email, role: str):
             "email": email,
             "phone": "11921223",
             "role": role,
-        }
+        },
     )
 
     return user
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                 dropoff_latitude=dropoff_lat,
                 dropoff_longitude=dropoff_lng,
                 pickup_time=timezone.now(),
-                status=Ride.EN_ROUTE
+                status=Ride.EN_ROUTE,
             )
 
         for _ in range(1, 5):
@@ -64,13 +64,10 @@ class Command(BaseCommand):
                 dropoff_latitude=dropoff_lat,
                 dropoff_longitude=dropoff_lng,
                 pickup_time=timezone.now(),
-                status=Ride.PICKUP
+                status=Ride.PICKUP,
             )
 
-            RideEvent.objects.create(
-                ride=ride,
-                description=RideEvent.PICKUP_DESC
-            )
+            RideEvent.objects.create(ride=ride, description=RideEvent.PICKUP_DESC)
 
         for _ in range(1, 5):
             pickup_lat, pickup_lng = create_latlng()
@@ -84,10 +81,7 @@ class Command(BaseCommand):
                 dropoff_latitude=dropoff_lat,
                 dropoff_longitude=dropoff_lng,
                 pickup_time=timezone.now(),
-                status=Ride.DROPOFF
+                status=Ride.DROPOFF,
             )
 
-            RideEvent.objects.create(
-                ride=ride,
-                description=RideEvent.DROPOFF_DESC
-            )
+            RideEvent.objects.create(ride=ride, description=RideEvent.DROPOFF_DESC)

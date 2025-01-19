@@ -5,3 +5,7 @@ run:
 .PHONY: test
 test:
 	python wingz/manage.py test app
+
+.PHONY: lint
+lint:
+	black .
