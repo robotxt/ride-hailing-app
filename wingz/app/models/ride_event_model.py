@@ -3,6 +3,7 @@ from .ride_model import Ride
 
 
 class RideEvent(models.Model):
+    ENROUTE = "Status changed to en-route"
     PICKUP_DESC = "Status changed to pickup"
     DROPOFF_DESC = "Status changed to dropoff"
 
