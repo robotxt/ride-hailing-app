@@ -66,10 +66,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
         max_length=255,
     )
-    first_name = models.CharField(verbose_name="First name", max_length=30, default="first")
-    last_name = models.CharField(verbose_name="Last name", max_length=30, default="last")
+    first_name = models.CharField(
+        verbose_name="First name", max_length=30, default="first"
+    )
+    last_name = models.CharField(
+        verbose_name="Last name", max_length=30, default="last"
+    )
     phone = PhoneField.build(blank=True)
-    role = models.CharField(max_length=30, choices=ROLE_CHOICES, default=None, null=True)
+    role = models.CharField(
+        max_length=30, choices=ROLE_CHOICES, default=None, null=True
+    )
     is_admin = models.BooleanField(verbose_name="Admin", default=False)
     is_active = models.BooleanField(verbose_name="Active", default=True)
     is_staff = models.BooleanField(verbose_name="Staff", default=False)
@@ -80,8 +86,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     updated_by = models.CharField(verbose_name="Updated by", max_length=50)
 
     # Groups
-    groups = models.ManyToManyField(Group, verbose_name="Groups", related_name="user_groups")
-    user_permissions = models.ManyToManyField(Permission, verbose_name="Permissions", related_name="user_permissions")
+    groups = models.ManyToManyField(
+        Group, verbose_name="Groups", related_name="user_groups"
+    )
+    user_permissions = models.ManyToManyField(
+        Permission, verbose_name="Permissions", related_name="user_permissions"
+    )
 
     # Fields settings
     EMAIL_FIELD = "email"

@@ -14,13 +14,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="RideEvent",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("description", models.TextField()),
                 (
                     "ride",
                     models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, related_name="events", to="app.ride"
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="events",
+                        to="app.ride",
                     ),
                 ),
             ],

@@ -18,12 +18,40 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="User",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 ("password", models.CharField(max_length=128, verbose_name="password")),
-                ("last_login", models.DateTimeField(blank=True, null=True, verbose_name="last login")),
-                ("email", models.EmailField(max_length=255, unique=True, verbose_name="Email")),
-                ("first_name", models.CharField(default="first", max_length=30, verbose_name="First name")),
-                ("last_name", models.CharField(default="last", max_length=30, verbose_name="Last name")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        max_length=255, unique=True, verbose_name="Email"
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        default="first", max_length=30, verbose_name="First name"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        default="last", max_length=30, verbose_name="Last name"
+                    ),
+                ),
                 (
                     "phone",
                     models.CharField(
@@ -32,15 +60,23 @@ class Migration(migrations.Migration):
                         max_length=15,
                         null=True,
                         validators=[
-                            django.core.validators.BaseValidator(15, message="Enter a valid phone number."),
-                            django.core.validators.BaseValidator(15, message="Enter a valid phone number."),
+                            django.core.validators.BaseValidator(
+                                15, message="Enter a valid phone number."
+                            ),
+                            django.core.validators.BaseValidator(
+                                15, message="Enter a valid phone number."
+                            ),
                         ],
                     ),
                 ),
                 (
                     "role",
                     models.CharField(
-                        choices=[("ADMIN", "admin"), ("RIDER", "rider"), ("DRIVER", "driver")],
+                        choices=[
+                            ("ADMIN", "admin"),
+                            ("RIDER", "rider"),
+                            ("DRIVER", "driver"),
+                        ],
                         default=None,
                         max_length=30,
                         null=True,
@@ -49,14 +85,32 @@ class Migration(migrations.Migration):
                 ("is_admin", models.BooleanField(default=False, verbose_name="Admin")),
                 ("is_active", models.BooleanField(default=True, verbose_name="Active")),
                 ("is_staff", models.BooleanField(default=False, verbose_name="Staff")),
-                ("is_superuser", models.BooleanField(default=False, verbose_name="Superuser")),
-                ("created_by", models.CharField(max_length=50, verbose_name="Created by")),
-                ("updated_by", models.CharField(max_length=50, verbose_name="Updated by")),
-                ("groups", models.ManyToManyField(related_name="user_groups", to="auth.group", verbose_name="Groups")),
+                (
+                    "is_superuser",
+                    models.BooleanField(default=False, verbose_name="Superuser"),
+                ),
+                (
+                    "created_by",
+                    models.CharField(max_length=50, verbose_name="Created by"),
+                ),
+                (
+                    "updated_by",
+                    models.CharField(max_length=50, verbose_name="Updated by"),
+                ),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        related_name="user_groups",
+                        to="auth.group",
+                        verbose_name="Groups",
+                    ),
+                ),
                 (
                     "user_permissions",
                     models.ManyToManyField(
-                        related_name="user_permissions", to="auth.permission", verbose_name="Permissions"
+                        related_name="user_permissions",
+                        to="auth.permission",
+                        verbose_name="Permissions",
                     ),
                 ),
             ],
@@ -68,7 +122,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="Ride",
             fields=[
-                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
                 (
                     "pickup_latitude",
                     models.DecimalField(
@@ -117,7 +179,11 @@ class Migration(migrations.Migration):
                 (
                     "status",
                     models.CharField(
-                        choices=[("EN_ROUTE", "en-route"), ("PICKUP", "pickup"), ("DROPOFF", "dropoff")],
+                        choices=[
+                            ("EN_ROUTE", "en-route"),
+                            ("PICKUP", "pickup"),
+                            ("DROPOFF", "dropoff"),
+                        ],
                         default=None,
                         max_length=8,
                     ),
@@ -143,7 +209,9 @@ class Migration(migrations.Migration):
         migrations.AddConstraint(
             model_name="user",
             constraint=models.UniqueConstraint(
-                fields=("email",), name="email", violation_error_message="Email already exist."
+                fields=("email",),
+                name="email",
+                violation_error_message="Email already exist.",
             ),
         ),
     ]

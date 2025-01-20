@@ -1,5 +1,13 @@
 from rest_framework import permissions
-from django.db.models import F, ExpressionWrapper, DurationField, Count, OuterRef, Value, CharField
+from django.db.models import (
+    F,
+    ExpressionWrapper,
+    DurationField,
+    Count,
+    OuterRef,
+    Value,
+    CharField,
+)
 from django.db.models.functions import ExtractMonth, ExtractYear, Concat, Cast
 from .viewsets import BaseViewSet
 from app.models import RideEvent
@@ -23,11 +31,27 @@ class ReportAPI(BaseViewSet):
                     description="Status changed to dropoff",
                 ).values("created_at")[:1],
             )
-            .annotate(duration=ExpressionWrapper(F("dropoff_time") - F("created_at"), output_field=DurationField()))
+            .annotate(
+                duration=ExpressionWrapper(
+                    F("dropoff_time") - F("created_at"), output_field=DurationField()
+                )
+            )
             .filter(duration__gt="1 hour")
             .annotate(year=ExtractYear("created_at"), month=ExtractMonth("created_at"))
-            .annotate(driver=Concat(F("ride__driver__first_name"), Value(" "), F("ride__driver__last_name")))
-            .annotate(date=Concat(Cast(F("year"), CharField()), Value("-"), Cast(F("month"), CharField())))
+            .annotate(
+                driver=Concat(
+                    F("ride__driver__first_name"),
+                    Value(" "),
+                    F("ride__driver__last_name"),
+                )
+            )
+            .annotate(
+                date=Concat(
+                    Cast(F("year"), CharField()),
+                    Value("-"),
+                    Cast(F("month"), CharField()),
+                )
+            )
             .values("date", "driver")
             .annotate(trip_count=Count("ride_id"))
             .order_by("month", "ride__driver")

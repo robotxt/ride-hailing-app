@@ -43,7 +43,9 @@ class TestAuthAPI(TestCase):
         response_data = response.json()
 
         self.assertEqual(400, response.status_code)
-        self.assertEqual(LoginSerializer.INVALID_LOGIN, response_data["non_field_errors"][0])
+        self.assertEqual(
+            LoginSerializer.INVALID_LOGIN, response_data["non_field_errors"][0]
+        )
 
     def test_invalid_password_login(self):
         client = Client()
@@ -57,4 +59,6 @@ class TestAuthAPI(TestCase):
         )
         response_data = response.json()
         self.assertEqual(400, response.status_code)
-        self.assertEqual(LoginSerializer.INVALID_LOGIN, response_data["non_field_errors"][0])
+        self.assertEqual(
+            LoginSerializer.INVALID_LOGIN, response_data["non_field_errors"][0]
+        )
