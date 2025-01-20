@@ -54,37 +54,6 @@ class Command(BaseCommand):
                 pickup_time=timezone.now(),
                 status=Ride.EN_ROUTE,
             )
-
-        for _ in range(1, 5):
-            pickup_lat, pickup_lng = create_latlng()
-            dropoff_lat, dropoff_lng = create_latlng()
-
-            ride = Ride.objects.create(
-                rider=rider,
-                driver=driver,
-                pickup_latitude=pickup_lat,
-                pickup_longitude=pickup_lng,
-                dropoff_latitude=dropoff_lat,
-                dropoff_longitude=dropoff_lng,
-                pickup_time=timezone.now(),
-                status=Ride.PICKUP,
-            )
-
+            RideEvent.objects.create(ride=ride, description=RideEvent.ENROUTE)
             RideEvent.objects.create(ride=ride, description=RideEvent.PICKUP_DESC)
-
-        for _ in range(1, 5):
-            pickup_lat, pickup_lng = create_latlng()
-            dropoff_lat, dropoff_lng = create_latlng()
-
-            ride = Ride.objects.create(
-                rider=rider,
-                driver=driver,
-                pickup_latitude=pickup_lat,
-                pickup_longitude=pickup_lng,
-                dropoff_latitude=dropoff_lat,
-                dropoff_longitude=dropoff_lng,
-                pickup_time=timezone.now(),
-                status=Ride.DROPOFF,
-            )
-
             RideEvent.objects.create(ride=ride, description=RideEvent.DROPOFF_DESC)
