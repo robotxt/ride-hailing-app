@@ -9,7 +9,10 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DEFAULT_TIMEOUT=100
 
 RUN apt-get update && apt-get install -y libpq-dev gdal-bin gcc
+RUN apt-get install postgis -q -y --force-yes
+RUN apt-get install postgresql-13-postgis-3
 RUN pip install --upgrade pip poetry setuptools
+
 
 # create user and make the app dir the working directory
 RUN useradd -m -d /appuser/ appuser

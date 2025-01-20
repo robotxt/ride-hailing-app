@@ -1,3 +1,5 @@
+CONTAINER := wingz_backend
+
 .PHONY: run 
 run:
 	python wingz/manage.py runserver 0.0.0.0:9090
@@ -9,3 +11,15 @@ test:
 .PHONY: lint
 lint:
 	black .
+
+
+.PHONY: seed
+seed:
+	docker-compose run --rm --no-deps $(CONTAINER) \
+		python manage.py seed
+
+
+.PHONY: shell
+shell:
+	docker-compose run --rm --no-deps $(CONTAINER) \
+		python manage.py shell
