@@ -1,6 +1,7 @@
 from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import Distance
-from django.db.models import F
+from django.db.models import F, Func
+from django.contrib.gis.db.models import PointField
 from .viewsets import BaseViewSet
 from rest_framework import permissions
 from rest_framework.viewsets import GenericViewSet
@@ -29,11 +30,19 @@ class RideAPI(BaseViewSet, GenericViewSet):
 
         items = self.get_queryset()
         items = items.order_by(sort_pickup)
+
         if latitude and longitude:
-            query_location = Point(longitude, latitude, srid=4326)
+            query_location = Point(float(longitude), float(latitude), srid=4326)
             items = items.annotate(
-                location=Point(F("pickup_longitude"), F("pickup_latitude"), srid=4326),  # Construct a Point on-the-fly
-                distance=Distance(query_location, Point(F("pickup_longitude"), F("pickup_latitude"), srid=4326)),
+                distance=Distance(
+                    query_location,
+                    Func(
+                        F("pickup_longitude"),
+                        F("pickup_latitude"),
+                        function="ST_MakePoint",
+                        output_field=PointField(srid=4326),
+                    ),
+                ),
             ).order_by(
                 "distance"
             )  # Sort: by closest distance
