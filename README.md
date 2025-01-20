@@ -59,14 +59,26 @@ Payload:
     "password": "Password101"
 }
 ```
+Login will return Token to be used in Header.
+
 
 ### Ride API
+
+Requires authentication token in header:
+```
+{
+    "Authorization": "Token <token>"
+}
+```
+
+#### Endpoints:
+
 Retrieve all rides
 ```
 GET: http://localhost:8000/api/v1/ride/
 ```
 
-Retrieve all paginate
+Retrieve all with pagination
 ```
 GET: http://localhost:8000/api/v1/ride/?page=2
 ```
