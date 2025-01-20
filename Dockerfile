@@ -29,6 +29,5 @@ COPY pyproject.toml poetry.lock /server/
 RUN poetry cache clear --all pypi
 RUN poetry config virtualenvs.create false && poetry update
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi --no-root
-RUN poetry add python-dotenv
 
 WORKDIR /server/
