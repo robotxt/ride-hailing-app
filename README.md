@@ -1,6 +1,20 @@
 # Ride Hailing
 
-### Create environment variables:
+
+## Requirements:
+
+**Python:** ^3.10
+
+**Django:** 5.1.5
+
+**Docker**
+
+**Poetry**: Dependency Management Tool ([https://python-poetry.org/docs/](https://python-poetry.org/docs/))
+
+**PostGIS**: Geographic object support for PostgreSQL ([https://docs.djangoproject.com/en/5.1/ref/contrib/gis/install/postgis/](https://docs.djangoproject.com/en/5.1/ref/contrib/gis/install/postgis/))
+
+
+## Development
 
 Copy .env.template to .env
 
@@ -8,13 +22,15 @@ Copy .env.template to .env
 cp .env.template .env
 ```
 
-### Run docker compose
+Run docker compose
 
 ```docker
 docker-compose up --build
 ```
 
-### Create test data
+Open: [http://localhost:8000](http://localhost:8000)
+
+## Create test data
 This will create users (admin, rider, driver). This also create a data for Ride and Ride Event. Ride latitude and longitude are base in US
 
 #### Using makefile
@@ -30,9 +46,9 @@ python wingz/manage.py seed
 ```
 
 
-### API Endpoints
+## API Endpoints
 
-#### List of Events API
+### Login API
 ```
 POST: http://localhost:8000/api/v1/login/
 ```
@@ -44,7 +60,7 @@ Payload:
 }
 ```
 
-#### Ride API
+### Ride API
 Retrieve all rides
 ```
 GET: http://localhost:8000/api/v1/ride/
