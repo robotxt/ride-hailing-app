@@ -45,6 +45,18 @@ make seed
 python wingz/manage.py seed
 ```
 
+## Run test
+
+```makefile
+make test
+```
+
+## Run lint
+
+```makefile
+make lint
+```
+
 
 ## API Endpoints
 
