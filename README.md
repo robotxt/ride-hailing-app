@@ -97,7 +97,7 @@ GET: http://localhost:8000/api/v1/ride/?page=2
 
 Sort Rides by pickup_time
 ```
-GET: http://localhost:8000/api/v1/ride/?sort-pickup-time=asc
+GET: http://localhost:8000/api/v1/ride/?sort_pickup_time=asc
 ```
 
 Sort Rides by distance
